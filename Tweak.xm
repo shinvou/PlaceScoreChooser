@@ -39,7 +39,7 @@ static BOOL showMenu = YES;
 - (void)viewDidLoad
 {
     %orig;
-
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
@@ -50,7 +50,7 @@ static BOOL showMenu = YES;
 - (void)viewDidLoad
 {
     %orig;
-
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
@@ -61,7 +61,7 @@ static BOOL showMenu = YES;
 - (void)viewDidLoad
 {
     %orig;
-
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
@@ -73,7 +73,7 @@ static BOOL showMenu = YES;
 -(void)viewDidLoad
 {
 	%orig;
-
+    
 	if (!showMenu) {
 		self.view.hidden = YES;
 	}
@@ -85,35 +85,31 @@ static BOOL showMenu = YES;
 
 - (void)viewDidLoad
 {
-	%orig;
-
-	UIView *gotBottomView = MSHookIvar<UIView *>(self, "_bottomView");
-
-	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-	[tapRecognizer setNumberOfTapsRequired:3];
-	[gotBottomView addGestureRecognizer:tapRecognizer];
-	[tapRecognizer release];
+    %orig;
+    
+    UIView *gotBottomView = MSHookIvar<UIView *>(self, "_bottomView");
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    [tapRecognizer setNumberOfTapsRequired:3];
+    [gotBottomView addGestureRecognizer:tapRecognizer];
+    [tapRecognizer release];
 }
 
 %new
 - (void)tapped:(UISwipeGestureRecognizer *)gesture
 {
-	showMenu = NO;
-	[self pauseGame];
-
-	UIAlertView *myAlert = [[UIAlertView alloc] initWithTitle:@"PlaceScoreChoser"
-												message:@"Set a new score, it will be displayed in just a second.\nCopyright © 2014 Timm Kandziora."
-												delegate:nil
-												cancelButtonTitle:@"Ok"
-												otherButtonTitles:nil];
-	[myAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-	[myAlert setDelegate:self];
-
+    showMenu = NO;
+    [self pauseGame];
+    
+    UIAlertView *myAlert = [[UIAlertView alloc] initWithTitle:@"PlaceScoreChoser" message:@"Set a new score, it will be displayed in just a second.\nCopyright © 2014 Timm Kandziora." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [myAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [myAlert setDelegate:self];
+    
     UITextField *textField = [myAlert textFieldAtIndex:0];
     [textField setKeyboardType:UIKeyboardTypeNumberPad];
     [textField setPlaceholder:@"Score ..."];
     [textField setDelegate:self];
-
+    
     [myAlert show];
     [myAlert release];
 }
@@ -124,24 +120,24 @@ static BOOL showMenu = YES;
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
     if ([title isEqualToString:@"Ok"]) {
-    	[self resumeGame];
-    	showMenu = YES;
-
-    	UITextField *textField = [alertView textFieldAtIndex:0];
-    	NSString *newScoreString = textField.text;
-    	
-    	if (newScoreString.intValue > 0) {
+        [self resumeGame];
+        showMenu = YES;
+        
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        NSString *newScoreString = textField.text;
+        
+        if (newScoreString.intValue > 0) {
             self.score = newScoreString.intValue;
             [self performSelector:@selector(updateScoreView) withObject:nil afterDelay:1.0];
-    	}
+        }
     }
 }
 
 %new
 - (void)updateScoreView
 {
-	ScoreView *gotScoreView = MSHookIvar<ScoreView *>(self, "_scoreView");
-	[gotScoreView setLeftScore:self.score WithAnimation:YES];
+    ScoreView *gotScoreView = MSHookIvar<ScoreView *>(self, "_scoreView");
+    [gotScoreView setLeftScore:self.score WithAnimation:YES];
 }
 
 %end
