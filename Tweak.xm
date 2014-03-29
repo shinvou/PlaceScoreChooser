@@ -72,11 +72,11 @@ static BOOL showMenu = YES;
 
 -(void)viewDidLoad
 {
-	%orig;
+    %orig;
     
-	if (!showMenu) {
-		self.view.hidden = YES;
-	}
+    if (!showMenu) {
+        self.view.hidden = YES;
+    }
 }
 
 %end
