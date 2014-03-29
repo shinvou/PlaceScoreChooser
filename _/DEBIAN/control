@@ -1,0 +1,10 @@
+Package: com.shinvou.PlaceScoreChooser
+Name: PlaceScoreChooser
+Depends: mobilesubstrate
+Architecture: iphoneos-arm
+Description: Set every score you like on a venue you want to own!
+Maintainer: Timm Kandziora
+Author: Timm Kandziora
+Section: Tweaks
+Version: 1.0-1
+Installed-Size: 88

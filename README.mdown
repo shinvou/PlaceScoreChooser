@@ -1,0 +1,32 @@
+# PlaceScoreChooser
+## Set every score you like on a venue you want to own
+
+### Intro
+PlaceScoreChooser is a jailbreak extension for iOS that allows users to set every score they like on venues without actually having to play the game.
+
+PlaceScoreChooser works with Placescore.app version 1.1.
+
+### How do I PlacecoreChooser?
+Open Placescore, choose a venue and tap three times on the score view on the bottom.
+
+### How do I get?
+I decided to not put it on Cydia because it's more a proof-of-concept than a hack you should use.
+
+Otherwise, if you want to test it, compile it for yourself or use the .deb included.
+
+### How do I compile?
+You should know that. :P
+
+### License?
+Pretty much the BSD license, just don't repackage it and call it your own please!
+
+Also if you do make some changes, feel free to make a pull request and help make things more awesome!
+
+### Contact Info?
+If you have any support requests please feel free to email me at shinvou[at]gmail[dot]com.
+
+Otherwise, feel free to follow me on twitter: [@biscoditch](https:///www.twitter.com/biscoditch)!
+
+### Special Thanks
+saurik for CydiaSubstrate.  
+Placescore, for being awesome and creating such a fun game.
