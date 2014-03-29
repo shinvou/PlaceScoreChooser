@@ -6,7 +6,7 @@ PlaceScoreChooser is a jailbreak extension for iOS that allows users to set ever
 
 PlaceScoreChooser works with Placescore.app version 1.1.
 
-### How do I PlacecoreChooser?
+### How do I PlaceScoreChooser?
 Open Placescore, choose a venue and tap three times on the score view on the bottom.
 
 ### How do I get?
