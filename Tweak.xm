@@ -1,6 +1,6 @@
 //
 //  Tweak.xm
-//  PlacescoreHack
+//  PlaceScoreChooser
 //
 //  Created by Timm Kandziora on 15.03.14.
 //  Copyright (c) 2014 Timm Kandziora. All rights reserved.
@@ -89,7 +89,7 @@ static BOOL showMenu = YES;
 
 	UIView *gotBottomView = MSHookIvar<UIView *>(self, "_bottomView");
 
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
 	[tapRecognizer setNumberOfTapsRequired:3];
 	[gotBottomView addGestureRecognizer:tapRecognizer];
 	[tapRecognizer release];
@@ -101,20 +101,20 @@ static BOOL showMenu = YES;
 	showMenu = NO;
 	[self pauseGame];
 
-	UIAlertView *myAlert = [[UIAlertView alloc] initWithTitle:@"PlaceScoreChoser" 
-												message:@"Set a new score, it will be displayed in just a second.\nCopyright © 2014 Timm Kandziora." 
-												delegate:nil 
-												cancelButtonTitle:@"Ok" 
+	UIAlertView *myAlert = [[UIAlertView alloc] initWithTitle:@"PlaceScoreChoser"
+												message:@"Set a new score, it will be displayed in just a second.\nCopyright © 2014 Timm Kandziora."
+												delegate:nil
+												cancelButtonTitle:@"Ok"
 												otherButtonTitles:nil];
-    [myAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [myAlert setDelegate:self];
+	[myAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+	[myAlert setDelegate:self];
 
     UITextField *textField = [myAlert textFieldAtIndex:0];
     [textField setKeyboardType:UIKeyboardTypeNumberPad];
     [textField setPlaceholder:@"Score ..."];
     [textField setDelegate:self];
 
-	[myAlert show];
+    [myAlert show];
     [myAlert release];
 }
 
@@ -141,7 +141,7 @@ static BOOL showMenu = YES;
 - (void)updateScoreView
 {
 	ScoreView *gotScoreView = MSHookIvar<ScoreView *>(self, "_scoreView");
-    [gotScoreView setLeftScore:self.score WithAnimation:YES];
+	[gotScoreView setLeftScore:self.score WithAnimation:YES];
 }
 
 %end
