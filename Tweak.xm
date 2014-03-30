@@ -6,10 +6,6 @@
 //  Copyright (c) 2014 Timm Kandziora. All rights reserved.
 //
 
-@interface GamePausedViewController : UIViewController
--(void)viewDidLoad;
-@end
-
 @interface GameViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate>
 @property (assign) int score;
 -(void)pauseGame;
@@ -33,6 +29,16 @@
 @end
 
 static BOOL showMenu = YES;
+static UIWindow *window = nil;
+
+%hook AppDelegate
+
+- (void)applicationDidBecomeActive:(id)application
+{
+    window = MSHookIvar<UIWindow *>(self, "_window");
+}
+
+%end
 
 %hook NotificationsViewController
 
@@ -67,20 +73,6 @@ static BOOL showMenu = YES;
 
 %end
 
-
-%hook GamePausedViewController
-
--(void)viewDidLoad
-{
-    %orig;
-    
-    if (!showMenu) {
-        self.view.hidden = YES;
-    }
-}
-
-%end
-
 %hook GameViewController
 
 - (void)viewDidLoad
@@ -93,6 +85,16 @@ static BOOL showMenu = YES;
     [tapRecognizer setNumberOfTapsRequired:3];
     [gotBottomView addGestureRecognizer:tapRecognizer];
     [tapRecognizer release];
+}
+
+- (void)pauseGame
+{
+    %orig;
+    
+    if (!showMenu) {
+        UIView *view = [[[[window subviews] objectAtIndex:0] subviews] objectAtIndex:2];
+        view.hidden = YES;
+    }
 }
 
 %new
