@@ -35,6 +35,8 @@ static UIWindow *window = nil;
 
 - (void)applicationDidBecomeActive:(id)application
 {
+    %orig;
+    
     window = MSHookIvar<UIWindow *>(self, "_window");
 }
 
